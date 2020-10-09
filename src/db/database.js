@@ -4,14 +4,14 @@ function retryConnect(uri, options) {
     mongoose.connect(`${uri}?authSource=admin`, options)
 }
 
-module.exports = function ({ db, user, pass }) {
+module.exports = function ({ host, db, user, pass }) {
     const options = {
         useNewUrlParser: true,
         reconnectTries: 300,
         reconnectInterval: 500,
         connectTimeoutMS: 10000,
     };
-    const uri = `mongodb+srv://${user}:${pass}@cluster0.mud17.mongodb.net/${db}?retryWrites=true&w=majority`
+    const uri = `mongodb+srv://${user}:${pass}@${host}/${db}?retryWrites=true&w=majority`
 
     mongoose.connect(uri, options)
 

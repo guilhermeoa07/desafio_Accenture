@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 const normalizePort = require('normalize-port');
 const config = require('./config')();
+const logger = require('./handlers/logger')
 
 const port = normalizePort(process.env.PORT || config.port);
 
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
 require('./routers/user')(app);
 
 app.listen(port, () => {
-    console.log('Servidor Online na porta: ' + port);
+    logger('Infor', `Servidor Online na porta: ${port}`);
 });
 
 app.use('*', (req, res) => {
