@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const normalizePort = require('normalize-port');
 const config = require('./config')();
 
-const port = normalizePort(config.port || 3000);
+const port = normalizePort(process.env.PORT || config.port);
 
 //database local
 require('./db/database')({
