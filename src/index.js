@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const normalizePort = require('normalize-port');
 const config = require('./config')();
 
@@ -15,7 +16,7 @@ require('./db/database')({
 });
 
 const app = express();
-
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
