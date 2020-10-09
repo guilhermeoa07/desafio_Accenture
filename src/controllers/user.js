@@ -9,6 +9,7 @@ function decodeToken(authorization) {
 
 	const parts = authHeader.split(' ');
 
+	// eslint-disable-next-line no-unused-vars
 	const [scheme, token] = parts;
 
 	return token;
@@ -57,7 +58,7 @@ exports.logginUser = async (req, res) => {
 		})
 
 	} catch (err) {
-		logger('Error', err)
+		logger('Error', {...err})
 		res.status(400).send({ Erro: err });
 	}
 };
@@ -68,7 +69,7 @@ exports.getUser = async (req, res) => {
 		const reqToken = decodeToken(req.headers.authorization)
 
 		if (!await bcrypt.compare(reqToken, user.token)) {
-			res.status(401).send({ Message: 'Não Autorizado.' })
+			res.status(403).send({ Message: 'Não Autorizado.' })
 		} else {
 			return res.status(201).send({
 				id: user.id,
