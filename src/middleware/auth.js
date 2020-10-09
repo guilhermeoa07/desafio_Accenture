@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const authConfig = require('../config/Auth.json');
+const config = require('../config')()
 
 module.exports = (req, res, next) => {
 	const authHeader = req.headers.authorization;
@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
 
 	if (!/^Bearer$/i.test(scheme)) return res.status(401).send({ Error: 'Token invalido.' });
 
-	jwt.verify(token, authConfig.secret, (err, decode) => {
+	jwt.verify(token, config.secret, (err, decode) => {
 		if (err) return res.status(401).send({ Error: 'Token Invalido ou expirado.' });
 
 		req.userId = decode.id;

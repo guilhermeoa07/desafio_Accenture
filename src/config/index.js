@@ -1,6 +1,5 @@
-const { eventNames } = require('..')
-
 require('dotenv').config()
+
 const env = process.env
 const environment = env.environment
 
@@ -11,9 +10,11 @@ module.exports = () => {
         return {
             secret: env[`secret_${environment}`],
             port: env[`port_${environment}`],
-            port_db: env[`port_db_${environment}`],
-            ip_db: env[`ip_db_${environment}`],
+            port_db: env[`port_db`],
+            host_db: env[`host_db_${environment}`],
             db: env[`db_${environment}`],
+            mongo_user: env[`mongo_user_${environment}`], 
+            mongo_pass: env[`mongo_pass_${environment}`]
         }
     }
 }
